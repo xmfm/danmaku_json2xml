@@ -21,9 +21,9 @@ def json2xml(json_file):
             if not danmaku.get('text'):  # 跳过礼物
                 continue
             d = doc.createElement('d')
-            # 后续转为 ass 文件时并不需要，故未将 uid 转换为标准形式
+            uid_crc32b = hex(binascii.crc32(str(danmaku['user_id']).encode()))[2:]
             p = f'{(danmaku["time"]-start_time)/1000},1,25,16777215,' \
-                f'{danmaku["time"]//1000},0,{danmaku["user_id"]},{danmaku["i"]}'
+                f'{danmaku["time"]//1000},0,{uid_crc32b},{danmaku["i"]}'
             d.setAttribute('p', p)
             d.appendChild(doc.createTextNode(danmaku['text']))
             root.appendChild(d)
