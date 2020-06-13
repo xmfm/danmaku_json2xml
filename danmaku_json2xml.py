@@ -2,6 +2,7 @@ import json
 import xml.dom.minidom
 import sys
 import os
+import binascii
 
 
 def json2xml(json_file):
